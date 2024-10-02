@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Time</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .time-container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 5rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="time-container">
+        <p><strong id="time">{{ time }}</strong></p>
+    </div>
+</body>
+
+<script>
+function getTime(){
+    fetch('/get_time')
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById('time').textContent = data.time;
+    });
+}
+
+setInterval(getTime, 1000);
+
+</script>
+</html>
